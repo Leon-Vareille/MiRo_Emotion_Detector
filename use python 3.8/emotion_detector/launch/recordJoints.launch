@@ -1,0 +1,4 @@
+ <launch>
+		<node pkg="emotion_detector" name="saveJointValues.py" type="saveJointValues.py"></node>
+
+</launch> 

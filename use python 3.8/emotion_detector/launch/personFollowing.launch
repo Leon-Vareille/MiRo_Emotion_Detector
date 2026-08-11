@@ -1,0 +1,8 @@
+<launch>
+		<node pkg="emotion_detector" name="getImg.py" type="getImg.py"></node>
+		<node pkg="emotion_detector" name="distToWheels.py" type="distToWheels.py" ></node>
+		<node pkg="emotion_detector" name="jitterless.py" type="jitterless.py" output="screen"></node>
+		
+		<!-- Comment out the line below if you dont want to save the joint states in the log files -->
+		<include file="$(find emotion_detector)/launch/recordJoints.launch"/>
+</launch> 
