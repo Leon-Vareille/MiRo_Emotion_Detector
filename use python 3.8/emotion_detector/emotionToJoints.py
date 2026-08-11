@@ -68,7 +68,7 @@ def callback(emotion):
         prevEmotion[0] = emotion
         prevEmotion[1] = 0
         allowEmotionUpdate = False
-        rospy.Timer(rospy.Duration(3,0), updateAllowEmotionUpdate, oneshot=True)
+        rospy.Timer(rospy.Duration(1,0), updateAllowEmotionUpdate, oneshot=True)
     
     setJoints(prevEmotion[0])
         
@@ -268,7 +268,7 @@ def updateAllowEmotionUpdate(data):
 def setJoints(emotion):
     global eyelidLevels
      
-    emotion = -1
+    #emotion = -1
     
     print("Passing through", emotion)
     eyelidLevels = [0.05, 0.05]
