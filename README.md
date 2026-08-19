@@ -10,6 +10,6 @@ VLM Modles from LeRobot as well as Microsoft MediaPipe were used to impliment th
 
 
 
-#QT Robot
+# QT Robot
 
 very simlar to the miro, it used the rosbridge to connect to the higher python version to run the facial expression detector as well.
