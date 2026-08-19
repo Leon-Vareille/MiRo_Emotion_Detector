@@ -24,17 +24,23 @@ facePosition = None
 whereWeAre = [0,0]
 headTimer = 0
 allowTimeout = False
+allowSetNeck = [0,0]
 
 def getWhereWeAre(data):
     global whereWeAre
+    global allowSetNeck
     whereWeAre = data.position[:2]
+    allowSetNeck[0] = 1
 
 
 def getfacePosition(data):
     global facePosition
     global headTimer
+    global allowSetNeck
+
     facePosition = data.data
     headTimer = 0
+    allowSetNeck[1] = 1
 
 
 def headTimeout(data):
@@ -47,6 +53,12 @@ def setNeck(data):
     global facePosition
     global whereWeAre
     global headTimer, allowTimeout
+    global allowSetNeck
+
+    if not(allowSetNeck[0] and allowSetNeck[1]):
+        #This prevents the robot from moving multiple times from the same frame data
+        return
+    allowSetNeck = [0,0]
 
 
     if isinstance(facePosition, type(None)):
@@ -62,9 +74,10 @@ def setNeck(data):
         pub.publish(Float64MultiArray().layout, JointValue)
 
         say = rospy.ServiceProxy("/qt_robot/speech/say", speech_say)
-        say("Where did you go")
+        #say("Where did you go")
         return
     
+    print("\n\n\n")
 
     allowTimeout = True
     basePos = [0,0]
@@ -75,7 +88,7 @@ def setNeck(data):
     JointUpper = 60
     JointLower = -60
     
-    positions = 55
+    positions = 70
     positionPeriod = 1/positions
     JointPeriod = (JointUpper-JointLower)/positions
 
@@ -101,14 +114,19 @@ def setNeck(data):
     
     #Outside the loop we can apply the found joint value
     print("The joint value currently is (horizontal): ", whereWeAre)
-    JointValue[0] = whereWeAre[1] - JointOffset
+
+    if whereWeAre[1] - JointOffset > whereWeAre[1]:
+        JointValue[0] = whereWeAre[1] - JointOffset
+    else:
+        JointValue[0] = whereWeAre[1] - JointOffset
+        #but it works
 
     #Stops the robot from trying to go to exceptional joint values
-    if JointValue[0] < -60:
-        JointValue[0] = -60
+    if JointValue[0] < JointLower:
+        JointValue[0] = JointLower
 
-    elif JointValue[0] > 60:
-        JointValue[0] = 60
+    elif JointValue[0] > JointUpper:
+        JointValue[0] = JointUpper
 
     print("Setting (horizontal) joint to ... ", JointValue[0])
 
@@ -142,11 +160,11 @@ def setNeck(data):
     JointValue[1] = whereWeAre[0] + JointOffset
 
     #Stops the robot from trying to go to exceptional joint values
-    if JointValue[1] < -25:
-        JointValue[1] = -25
+    if JointValue[1] < JointLower:
+        JointValue[1] = JointLower
 
-    elif JointValue[1] > 25:
-        JointValue[1] = 25
+    elif JointValue[1] > JointUpper:
+        JointValue[1] = JointUpper
 
     print("Setting (vertical) joint to ... ", JointValue[1])
     #"""
@@ -174,7 +192,7 @@ if __name__ == '__main__':
     rospy.Subscriber('/qt_robot/joints/state', JointState, getWhereWeAre)
 
     #gets the joint values
-    rospy.Timer(rospy.Duration(nsecs=500000000), setNeck)
+    rospy.Timer(rospy.Duration(nsecs=1000000000), setNeck)#1 times a second
 
     rospy.Timer(rospy.Duration(secs=1), headTimeout)
 
