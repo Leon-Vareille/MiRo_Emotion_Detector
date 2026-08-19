@@ -7,3 +7,9 @@ Built through Ros Noetic and using a ros bridge websocket to connect to the high
 This system works with the MiRo-E robots and the MDK from consequential robotics to impliment emotion detection into the robot as well as person following.
 
 VLM Modles from LeRobot as well as Microsoft MediaPipe were used to impliment these functions
+
+
+
+#QT Robot
+
+very simlar to the miro, it used the rosbridge to connect to the higher python version to run the facial expression detector as well.
