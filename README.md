@@ -13,3 +13,8 @@ VLM Modles from LeRobot as well as Microsoft MediaPipe were used to implement th
 # QT Robot
 
 very similar to the miro, but using the QT robots from luxai instead
+
+
+
+# expression detector
+Taking in an image to be passed to the VLM that will detect facial expressions, and then will return the facial expression as a number. 
