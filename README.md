@@ -22,6 +22,11 @@ VLM Modles from LeRobot as well as Microsoft MediaPipe were used to implement th
 
 very similar to the miro, but using the QT robots from luxai instead
 
+<h3>Zed i2 camera</h3>
+To use the zed i2 camera, the git for the camera will have to be installed into the src of the workspace for the code. it will be its own package, it can be found at:
+https://github.com/stereolabs/zed-ros-interfaces.git
+
+
 
 <br>
 <br>
