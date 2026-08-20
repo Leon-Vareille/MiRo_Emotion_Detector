@@ -1,5 +1,12 @@
 # MiRo_Emotion_Detector
 
+Both the miroCode and the QTCode have been ran through a docker image with the necessary robot code installed (miro MDK/ QTrobot SDK) and APIs. The docker has a volume allowing code to be stored and saved on the PC so the workspace isn't reset ever time the robot is turned off and on again. 
+
+
+<br>
+<br>
+<h2>miroCode</h2>
+
 Split into two, based on the required python version.
 
 Built through Ros Noetic and using a ros bridge websocket to connect to the higher python version(3.12) and extra python script.
@@ -9,12 +16,15 @@ This system works with the MiRo-E robots and the MDK from consequential robotics
 VLM Modles from LeRobot as well as Microsoft MediaPipe were used to implement these functions
 
 
-
-# QT Robot
+<br>
+<br>
+<h2>QTCode</h2>
 
 very similar to the miro, but using the QT robots from luxai instead
 
 
-
-# expression detector
+<br>
+<br>
+<h2>expressionDetector</h2>
 Taking in an image to be passed to the VLM that will detect facial expressions, and then will return the facial expression as a number. 
+It is used as a service in the ros system, though it requires the rosbridge, and the rosbridge to be sourced in the workspace of the miro/QT code to work
