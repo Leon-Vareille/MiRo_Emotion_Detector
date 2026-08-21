@@ -1,6 +1,6 @@
 # MiRo_Emotion_Detector
 
-Both the miroCode and the QTCode have been ran through a docker image with the necessary robot code installed (miro MDK/ QTrobot SDK) and APIs. The docker has a volume allowing code to be stored and saved on the PC so the workspace isn't reset ever time the robot is turned off and on again. 
+Both the miroCode and the QTCode have been ran through a docker compose with the necessary robot code installed (miro MDK/ QTrobot SDK) and APIs. The docker has a volume allowing code to be stored and saved on the PC so the workspace isn't reset ever time the robot is turned off and on again. 
 
 
 <br>
